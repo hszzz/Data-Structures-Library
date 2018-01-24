@@ -1,9 +1,10 @@
 #ifndef SMARTPOINT_H
 #define SMARTPOINT_H
+#include "HsObject.h"
 namespace HsTL
 {
 template <class T>
-class SmartPointer
+class SmartPointer : public HsObject
 {
 public:
     SmartPointer(T* p=NULL)
