@@ -13,6 +13,10 @@ public:
     virtual bool get(int i, T& e) const = 0;
     virtual int length() const = 0;
     virtual void clear() = 0;
+protected:
+    //容器禁止copy操作和赋值操作
+    T operator= (const List&) {}
+    List(const List&) {}
 };
 
 }
