@@ -1,13 +1,18 @@
 #ifndef SEQLIST_H
 #define SEQLIST_H
-#include "HsObject.h"
+#include "Object.h"
 #include "Exception.h"
 namespace HsTL
 {
 template <class T>
-class SeqList : public HsObject
+class SeqList : public Object
 {
 public:
+    bool insert(const T& e)
+    {
+        return insert(m_length, e);
+    }
+
     bool insert(int index, const T& e)
     {
         //判断插入位置是否合理
@@ -75,6 +80,22 @@ public:
     void clear()
     {
         m_length = 0;
+    }
+
+    int find(const T& e) const
+    {
+        int ret = -1;
+
+        for(int i=0; i<m_length; i++)
+        {
+            if(m_array[i] == e)
+            {
+                ret = i;
+                break;
+            }
+        }
+
+        return ret;
     }
 
     //非const List版本

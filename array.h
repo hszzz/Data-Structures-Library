@@ -1,11 +1,11 @@
 #ifndef ARRAY_H
 #define ARRAY_H
-#include "HsObject.h"
+#include "Object.h"
 #include "Exception.h"
 namespace HsTL
 {
 template <class T>
-class Array : public HsObject
+class Array : public Object
 {
 public:
     virtual bool set(int index, const T& e)

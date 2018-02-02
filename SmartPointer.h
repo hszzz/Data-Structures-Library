@@ -1,16 +1,17 @@
 #ifndef SMARTPOINT_H
 #define SMARTPOINT_H
-#include "HsObject.h"
+#include "Pointer.h"
+/*************************************
+ * 18-1-31 17:10
+**************************************/
 namespace HsTL
 {
 template <class T>
-class SmartPointer : public HsObject
+class SmartPointer : public Pointer<T>
+//两个指针不能指向同一片空间
 {
 public:
-    SmartPointer(T* p=NULL)
-    {
-        m_pointer = p;
-    }
+    SmartPointer(T* p=NULL) : Pointer<T>(p) {}
 
     SmartPointer(const SmartPointer<T>& obj)
     {
@@ -18,47 +19,23 @@ public:
         const_cast<SmartPointer<T>&>(obj).m_pointer=NULL;
     }
 
-    T& operator=(const SmartPointer<T>& obj)
+    SmartPointer<T>& operator=(const SmartPointer<T>& obj)
     {
         if(this!=&obj)
         {
-            delete this->m_pointer;
+            //异常安全
+            T* tmp = this->m_pointer;
             this->m_pointer=obj.m_pointer;
             const_cast<SmartPointer<T>&>(obj).m_pointer=NULL;
+            delete tmp;
         }
         return *this;
     }
 
-    T* operator-> ()
-    {
-        return m_pointer;
-    }
-
-    T& operator* ()
-    {
-        return *m_pointer;
-    }
-
-    T* get()
-    {
-        return m_pointer;
-    }
-
-    bool isNull()
-    {
-        return (m_pointer==NULL);
-    }
-
     ~SmartPointer()
     {
-        if(m_pointer!=NULL)
-        {
-            delete m_pointer;
-        }
+        delete this->m_pointer;
     }
-
-protected:
-    T* m_pointer;
 };
 }
 #endif // SMARTPOINT_H

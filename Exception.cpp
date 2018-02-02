@@ -6,8 +6,12 @@ namespace HsTL
 {
 void Exception::init(const char* message,const char* file,int line)
 {
+    /*  此种方法不行，当message为空时，代码不能正常运行
     m_message = (char*)malloc(strlen(message)+1);
     strcpy(m_message,message);
+    */
+    m_message = (message ? strdup(message) : NULL); //判断message是否为空， 为空则返回空
+
     if(file != NULL)
     {
         //将行号转换称字符串，并和file拼接
@@ -44,10 +48,14 @@ Exception::Exception(const char* message,const char* file,int line)
 
 Exception::Exception(const Exception &e)
 {
+    /*
     m_message=(char*)malloc(strlen(e.m_message)+1);
     strcpy(m_message,e.m_message);
     m_location=(char*)malloc(strlen(e.m_location)+1);
     strcpy(m_location,e.m_location);
+    */
+    m_message = strdup(e.m_message);
+    m_location = strdup(e.m_location);
 }
 
 Exception& Exception::operator=(const Exception& e)
@@ -56,11 +64,14 @@ Exception& Exception::operator=(const Exception& e)
     {
         free(m_message);
         free(m_location);
-
+        /*
         m_message=(char*)malloc(strlen(e.m_message)+1);
         strcpy(m_message,e.m_message);
         m_location=(char*)malloc(strlen(e.m_location)+1);
         strcpy(m_location,e.m_location);
+        */
+        m_message = strdup(e.m_message);
+        m_location = strdup(e.m_location);
     }
     return *this;
 }

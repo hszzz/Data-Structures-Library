@@ -1,12 +1,12 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
-#include "HsObject.h"
+#include "Object.h"
 namespace HsTL
 {
 //便于支持不支持抛出异常的编译器 ->#define THROW_EXCEPTION(e,m) //(throw e(m,__FILE__,__LINE__)) 即可
 #define THROW_EXCEPTION(e,m) (throw e(m,__FILE__,__LINE__))
 
-class Exception : public HsObject
+class Exception : public Object
 {
 public:
     Exception(const char* message);
