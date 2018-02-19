@@ -1,6 +1,6 @@
 #ifndef HSOBJECT_H
 #define HSOBJECT_H
-
+#include <cstddef>
 namespace HsTL
 {
 //顶层抽象父类，用来规范new delete运算符，所有子类都可以用它来动态类型识别
