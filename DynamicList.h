@@ -59,6 +59,7 @@ public:
             else //空间申请失败就抛出异常
             {
                 THROW_EXCEPTION(NoEnoughMemoryException,"No Memory To Resize DynamicList ...");
+                //shzzz
             }
 
         }
