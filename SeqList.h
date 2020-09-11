@@ -21,7 +21,7 @@ public:
 
         if(ret)
         {
-            for(int i=m_length; i>=index; i--)
+            for(int i=m_length-1; i>=index; i--)
             {
                 m_array[i+1] = m_array[i];
             }
