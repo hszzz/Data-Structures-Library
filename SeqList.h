@@ -5,7 +5,7 @@
 namespace HsTL
 {
 template <class T>
-class SeqList : public Object
+class SeqList : public Lis<T>
 {
 public:
     bool insert(const T& e)
