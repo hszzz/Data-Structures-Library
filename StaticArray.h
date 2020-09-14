@@ -30,6 +30,7 @@ public:
             {
                 m_space[i] = obj.m_space[i];
             }
+            return *this;
         }
     }
 
